@@ -21,10 +21,10 @@ read -p "Press enter to continue"
 
 echo -e "${Gre}\nUpgrading system...\n${RCol}"
 
-#sudo apt update
-#sudo apt install -y nala
+sudo apt update
+sudo apt install -y nala
 
-#sudo nala upgrade -y
+sudo nala upgrade -y
 
 echo -e "${Gre}\nInstalling basic packages using nala...\n${RCol}"
 
