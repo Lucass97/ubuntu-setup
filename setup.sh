@@ -21,16 +21,14 @@ read -p "Press enter to continue"
 
 echo -e "${Gre}\nUpgrading system...\n${RCol}"
 
-sudo apt update
-sudo apt install nala
+#sudo apt update
+#sudo apt install -y nala
 
-sudo nala upgrade
+#sudo nala upgrade -y
 
 echo -e "${Gre}\nInstalling basic packages using nala...\n${RCol}"
 
 sudo nala install -y htop bashtop tre-command git python3-pip python3-venv
-
-#--------------------------------------------------------------------------
 
 echo -e "${Gre}"
 read -r -p "Remove snap and install flatpak? [y/N] " response
@@ -46,27 +44,27 @@ fi
 
 #--------------------------------------------------------------------------
 
-if ! command -v flatpak &> /dev/null
+if ! command -v flatpak &> /dev/null 
 then
 	echo -e "${Red}\nflatpak could not be found\n${RCol}"
 else
-	echo -e "${Gre}\nInstalling browsers using flatpak...\n${RCol}"
+	echo -e "${Gre}\nInstalling browsers via flatpak...\n${RCol}"
 
 	sudo flatpak install -y flathub org.mozilla.firefox org.chromium.Chromium
 
-	echo -e "${Gre}\nInstalling IDEs...\n${RCol}"
+	echo -e "${Gre}\nInstalling IDEs via flatpak...\n${RCol}"
 
 	sudo flatpak install -y flathub com.jetbrains.PyCharm-Professional com.visualstudio.code
 
-	echo -e "${Gre}\nInstalling social apps...\n${RCol}"
+	echo -e "${Gre}\nInstalling social apps via flatpak...\n${RCol}"
 
 	sudo flatpak install -y flathub com.discordapp.Discord org.telegram.desktop com.microsoft.Teams
 
+	echo -e "${Gre}"
 	read -r -p "Install other apps? [y/N] " response
 	if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
-
 	then
-		echo -e "${Gre}\nInstalling other apps...\n${RCol}"
+		echo -e "${Gre}\nInstalling other apps via flatpak...\n${RCol}"
 
 		sudo flatpak install -y flathub org.gnome.Weather \
 			org.gnome.Calendar \
@@ -82,6 +80,7 @@ else
 			com.raggesilver.BlackBox
 	else
    		echo -e "${Red}\nSkipping...\n${RCol}"
+	fi
 fi
 
 #--------------------------------------------------------------------------
@@ -106,12 +105,12 @@ then
   		$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 	sudo nala update
-	sudo nala install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+	sudo nala install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 	
 	echo -e "${Gre}\nInstalling portainer...$\n${RCol}"
 
-	docker volume create portainer_data
-	docker run -d -p 8000:8000 -p 9443:9443 -p 9000:9000 --name portainer \
+	sudo docker volume create portainer_data
+	sudo docker run -d -p 8000:8000 -p 9443:9443 -p 9000:9000 --name portainer \
 		--restart=always \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v portainer_data:/data \
@@ -137,7 +136,7 @@ then
 
 	sudo add-apt-repository ppa:numix/ppa
 	sudo nala update
-	sudo nala install numix-icon-theme-circle
+	sudo nala install -y numix-icon-theme-circle
 
 	gsettings set org.gnome.desktop.interface icon-theme 'Numix-Circle'
 
@@ -152,11 +151,11 @@ read -r -p "Install Fish Shell? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
 	echo -e "${Gre}\nInstalling fish...\n${RCol}"
-	sudo nala install fish
-	sudo chsh -s /usr/local/bin/fish
+	sudo nala install -y fish
+	chsh -s /usr/local/bin/fish
 
-	cp fish-config/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
-	cp fish-config/tree.fish ~/.config/fish/functions/tre.fish
+	sudo cp fish-config/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+	sudo cp fish-config/tree.fish ~/.config/fish/functions/tre.fish
 
 else
     echo -e "${Red}\nSkipping...\n${RCol}"
