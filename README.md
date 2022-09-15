@@ -13,7 +13,11 @@ Script per la configurazione iniziale di Ubuntu.
 - Configurazione della shell [fish](https://github.com/fish-shell/fish-shell)
 
 ## Getting started
+
 ```git clone https://github.com/Lucass97/ubuntu-setup.git ```
+
 ```cd ubuntu-setup```
+
 ```chmod +x setup.sh ```
+
 ```sudo ./setup.sh ```
