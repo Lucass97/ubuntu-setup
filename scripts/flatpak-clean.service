@@ -1,0 +1,11 @@
+[Unit]
+Description=Flatpak clean service
+Before=motd-news.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/luca/utils/scripts/flatpak-clean.sh
+StandardOutput=journal+console
+
+[Install]
+WantedBy=multi-user.target

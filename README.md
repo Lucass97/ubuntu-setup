@@ -11,13 +11,21 @@ Script per la configurazione iniziale di Ubuntu.
 - Configurazione delle icone [Numix](https://github.com/numixproject/numix-icon-theme-circle)
 - Installazione di [Docker](https://www.docker.com/) e [Portainer](https://www.portainer.io/)
 - Configurazione della shell [fish](https://github.com/fish-shell/fish-shell)
+- Installazione  servizi in [systemd](https://www.systemd.it/) per l'esecuzione di script personalizzati (cartella [scripts](scripts)).
 
 ## Getting started
 
-```git clone https://github.com/Lucass97/ubuntu-setup.git ```
+### Setup iniziale
 
-```cd ubuntu-setup```
+```bash
+git clone https://github.com/Lucass97/ubuntu-setup.git 
+cd ubuntu-setup
+chmod +x setup.sh
+sudo ./setup.sh
+```
 
-```chmod +x setup.sh ```
-
-```sudo ./setup.sh ```
+### Installazione dei servizi
+```bash
+chmod +x install-services.sh
+sudo ./install-services.sh
+```
